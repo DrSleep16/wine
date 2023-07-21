@@ -4,6 +4,7 @@ import datetime
 import pandas
 from collections import defaultdict
 import os
+from dotenv import load_dotenv
 
 
 def calculate_years_passed(starting_year):
@@ -47,6 +48,7 @@ def start_server():
     server.serve_forever()
 
 def main():
+    load_dotenv()
     starting_year = 1920
     age_data = calculate_years_passed(starting_year)
     excel_file_path = os.getenv('EXCEL_FILE_PATH')
