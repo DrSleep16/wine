@@ -2,7 +2,6 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import datetime
 import pandas
-from collections import defaultdict
 import os
 from dotenv import load_dotenv
 
@@ -24,12 +23,15 @@ def calculate_years_passed(starting_year):
 def load_excel_data(file_path):
     excel_data = pandas.read_excel(file_path)
     excel_data.fillna('', inplace=True)
-    wine_dict = defaultdict(list)
+    wine_dict = {}
     for row in excel_data.to_dict(orient='records'):
-        category = row['Категория']
-        del row['Категория']
-        wine_dict[category].append(row)
-    return dict(wine_dict)
+        category = row.pop('Категория')
+        if category in wine_dict:
+            wine_dict[category].append(row)
+        else:
+            wine_dict[category] = [row]
+    return wine_dict
+
 
 def render_template(data):
     env = Environment(
