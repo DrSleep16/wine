@@ -8,16 +8,14 @@ from dotenv import load_dotenv
 
 def calculate_years_passed(starting_year):
     age = datetime.datetime.now().year - starting_year
-    if 11 <= age <= 14:
+    if 11 <= age <= 14 or 5 <= age % 10 <= 9 or age % 10 == 0:
         year_ending = 'лет'
     elif age % 10 == 1:
         year_ending = 'год'
     elif 2 <= age % 10 <= 4:
         year_ending = 'года'
-    elif 5 <= age % 10 <= 9 or age % 10 == 0:
-        year_ending = 'лет'
     else:
-        year_ending = 'Некорректная дата'
+        return 'Некорректная дата'
     return f"{age} {year_ending}"
 
 def load_excel_data(file_path):
