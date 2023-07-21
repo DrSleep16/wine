@@ -3,6 +3,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import datetime
 import pandas
 from collections import defaultdict
+import os
 
 
 def calculate_years_passed(starting_year):
@@ -19,7 +20,7 @@ def calculate_years_passed(starting_year):
         year_ending = 'Некорректная дата'
     return f"{age} {year_ending}"
 
-def load_excel_data(file_path):
+def load_excel_data(file_path='wine3.xlsx'):
     excel_data = pandas.read_excel(file_path)
     excel_data.fillna('', inplace=True)
     wine_dict = defaultdict(list)
@@ -48,7 +49,7 @@ def start_server():
 def main():
     starting_year = 1920
     age_data = calculate_years_passed(starting_year)
-    excel_file_path = 'wine3.xlsx'
+    excel_file_path = os.getenv('EXCEL_FILE_PATH')
     wine_data = load_excel_data(excel_file_path)
     data_to_render = {
         'age': age_data,
