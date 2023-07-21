@@ -20,7 +20,7 @@ def calculate_years_passed(starting_year):
         year_ending = 'Некорректная дата'
     return f"{age} {year_ending}"
 
-def load_excel_data(file_path='wine3.xlsx'):
+def load_excel_data(file_path):
     excel_data = pandas.read_excel(file_path)
     excel_data.fillna('', inplace=True)
     wine_dict = defaultdict(list)
