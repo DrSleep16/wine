@@ -5,7 +5,7 @@ import pandas
 from collections import defaultdict
 
 
-def years_have_passed(starting_year):
+def calculate_years_passed(starting_year):
     age = datetime.datetime.now().year - starting_year
     if 11 <= age <= 14:
         year_ending = 'лет'
@@ -35,7 +35,7 @@ env = Environment(
 )
 template = env.get_template('template.html')
 rendered_page = template.render(
-    age=years_have_passed(1920),
+    age=calculate_years_passed(1920),
     wines=wine_dict
 )
 with open('index.html', 'w', encoding="utf8") as file:
