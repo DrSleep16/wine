@@ -17,7 +17,7 @@ def calculate_years_passed(starting_year):
         year_ending = 'лет'
     else:
         year_ending = 'Некорректная дата'
-    return str(age) + ' ' + year_ending
+    return f"{age} {year_ending}"
 
 
 excel_data = pandas.read_excel('wine3.xlsx')
