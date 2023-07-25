@@ -9,6 +9,11 @@ from collections import defaultdict
 
 def calculate_years_passed(starting_year):
     age = datetime.datetime.now().year - starting_year
+    ending = determine_the_age_ending(age)
+    return f'{age} {ending}'
+
+
+def determine_the_age_ending(age):
     if 11 <= age <= 14 or 5 <= age % 10 <= 9 or age % 10 == 0:
         year_ending = 'лет'
     elif age % 10 == 1:
@@ -17,7 +22,8 @@ def calculate_years_passed(starting_year):
         year_ending = 'года'
     else:
         return 'Некорректная дата'
-    return f"{age} {year_ending}"
+    return year_ending
+
 
 def load_excel_data(file_path):
     excel_data = pandas.read_excel(file_path)
