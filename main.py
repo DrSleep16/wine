@@ -4,6 +4,7 @@ import datetime
 import pandas
 import os
 from dotenv import load_dotenv
+from collections import defaultdict
 
 
 def calculate_years_passed(starting_year):
@@ -21,13 +22,10 @@ def calculate_years_passed(starting_year):
 def load_excel_data(file_path):
     excel_data = pandas.read_excel(file_path)
     excel_data.fillna('', inplace=True)
-    wine_dict = {}
+    wine_dict = defaultdict(list)
     for row in excel_data.to_dict(orient='records'):
         category = row.pop('Категория')
-        if category in wine_dict:
-            wine_dict[category].append(row)
-        else:
-            wine_dict[category] = [row]
+        wine_dict[category].append(row)
     return wine_dict
 
 
