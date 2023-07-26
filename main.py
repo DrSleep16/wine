@@ -43,13 +43,16 @@ def render_template(data):
     template = env.get_template('template.html')
     return template.render(data)
 
+
 def save_to_html(html_content, output_file):
     with open(output_file, 'w', encoding="utf8") as file:
         file.write(html_content)
 
+
 def start_server():
     server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
     server.serve_forever()
+
 
 def main():
     load_dotenv()
@@ -65,6 +68,7 @@ def main():
     output_html_file = 'index.html'
     save_to_html(rendered_page, output_html_file)
     start_server()
+
 
 if __name__ == '__main__':
     main()
