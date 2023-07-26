@@ -14,15 +14,15 @@ def calculate_years_passed(starting_year):
 
 
 def determine_the_age_ending(age):
-    if 11 <= age <= 14 or 5 <= age % 10 <= 9 or age % 10 == 0:
-        year_ending = 'лет'
-    elif age % 10 == 1:
-        year_ending = 'год'
-    elif 2 <= age % 10 <= 4:
-        year_ending = 'года'
+    if age % 100 in (11, 12, 13, 14):
+        return "лет"
+    last_digit = age % 10
+    if last_digit == 1:
+        return "год"
+    elif last_digit in (2, 3, 4):
+        return "года"
     else:
-        return 'Некорректная дата'
-    return year_ending
+        return "лет"
 
 
 def load_excel_data(file_path):
